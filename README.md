@@ -14,6 +14,8 @@ $ npm start
 
 
 ## 데모 영상
+https://github.com/wnwlals13/wanted-pre-onboarding-frontend/assets/68106646/e6c24af1-aa79-4286-9b9d-dfec8c0507e9
+
 
 
 ## 구현기능
