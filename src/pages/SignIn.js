@@ -53,7 +53,7 @@ function SignIn() {
             console.log('res',res)
 
             // 할일페이지로 이동
-            navigate("/");
+            navigate("/todo");
             window.location.reload();
         })
         .catch ((error) => {
@@ -96,7 +96,7 @@ function SignIn() {
         />
 
         <Button
-          data-testid="signup-button"
+          data-testid="signin-button"
           btnText="로그인"
           type="submit"
           disabled={buttonStatus}

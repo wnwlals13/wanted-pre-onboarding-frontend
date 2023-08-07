@@ -13,7 +13,7 @@ const PrivateRoute = ({ authenticated, path, component: Component }) => {
     path != "todo" ? (
         Component
     ) : (
-        <Navigate to="/signin" {...alert("로그인 후 이용할 수 있습니다.")} />
+        <Navigate to="/signin" />
     )
   );
 };

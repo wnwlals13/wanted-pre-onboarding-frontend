@@ -95,12 +95,12 @@ function Todo() {
 
     useState(() => {
         loadTodos();
-    });
+    },[]);
 
     return(
         <Container >
             <TodoField id="login-form" onSubmit={handleSubmit}>
-                <TodoInput data-testid="new-todo-input" onChange={handleChange} value={text}/>
+                <TodoInput data-testid="new-todo-input" onChange={handleChange} value={text} placeholder='insert todo...'/>
                 <button data-testid="new-todo-add-button" >추가</button>
             </TodoField>
             <TodoListSection>
