@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import theme from './style/common';
+import Home from './pages/Home';
+import SignUp from './pages/SignUp';
+import SignIn from './pages/SignIn';
+import Nav from './components/Nav/Nav';
+import Footer from './components/Footer/Footer';
+import Todo from './pages/Todo';
+import Container from './components/Container';
+import { useEffect, useState } from 'react';
+import PrivateRoute from './api/PrivateRoute';
 
 function App() {
+  const [ isAuth, setIsAuth ] = useState(localStorage.getItem("loginToken") ? true : false);
+
+  useState(() => {
+    console.log(isAuth);
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Nav/>
+        <Routes>
+          <Route exact path='/' element={<Home />} />
+          <Route path="/signup" element={<PrivateRoute authenticated={isAuth} path="signup" component={<SignUp/>} />} />
+          <Route path="/signin" element={<PrivateRoute authenticated={isAuth} path="signin" component={<SignIn/>} />} />
+          <Route path='/todo' element={<PrivateRoute authenticated={isAuth} path="todo" component={<Todo/>} />} />
+        </Routes>
+      <Footer />
+    </ThemeProvider>
   );
 }
 
