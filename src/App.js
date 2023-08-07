@@ -7,16 +7,11 @@ import SignIn from './pages/SignIn';
 import Nav from './components/Nav/Nav';
 import Footer from './components/Footer/Footer';
 import Todo from './pages/Todo';
-import Container from './components/Container';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import PrivateRoute from './api/PrivateRoute';
 
 function App() {
   const [ isAuth, setIsAuth ] = useState(localStorage.getItem("loginToken") ? true : false);
-
-  useState(() => {
-    console.log(isAuth);
-  });
 
   return (
     <ThemeProvider theme={theme}>

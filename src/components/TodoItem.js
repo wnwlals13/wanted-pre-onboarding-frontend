@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { deleteTodo, updateTodo } from '../repository/Todo';
+import { updateTodo } from '../repository/Todo';
 import styled from "styled-components";
 /**
  * 투두 아이템 컴포넌트 (TodoItem)
@@ -22,7 +22,7 @@ const TodoButton = styled.button`
     margin-left : 5px;
 `;
 
-function TodoItem({data, loadTodos}) {
+function TodoItem({data, loadTodos, handleDelete}) {
     /* Data */
     const { id, todo, isCompleted } = data;
     const [isUpdate, setIsUpdate] = useState(false);
@@ -65,7 +65,7 @@ function TodoItem({data, loadTodos}) {
     const updateTodos = (newTodos) => {
         updateTodo(newTodos)
             .then((res) => {
-                console.log('res',res)
+                // console.log('res',res)
                 loadTodos();
             })
             .catch((err) => {
@@ -76,16 +76,8 @@ function TodoItem({data, loadTodos}) {
     /**
      * Function : 투두삭제 (deleteTodo)
      */
-    const handleDelete = () => {
-        deleteTodo(id)
-            .then((res) => {
-                console.log('res',res)
-                loadTodos();
-            })
-            .catch((err) => {
-                console.log('err',err)
-            })
-        window.location.reload();
+    const onDelete = () => {
+        handleDelete(id);
     };
 
     useEffect(() => {
@@ -93,7 +85,7 @@ function TodoItem({data, loadTodos}) {
     },[])
 
     return (
-        <StyledLi key={id}>
+        <StyledLi key={data.id}>
             <label>
                 <input type="checkbox" checked={isChecked} onChange={onCheck} />
                 { isUpdate ? null : <span>{todo}</span> }
@@ -102,12 +94,12 @@ function TodoItem({data, loadTodos}) {
                 <StyledForm onSubmit={handleSubmit}>
                     <input data-testid="modify-input" onChange={handleChange} value={text} />
                     <TodoButton data-testid="submit-button" >제출</TodoButton>
-                    <TodoButton data-testid="cancel-button" type="button" onClick={handleUpdate}>취소</TodoButton>
+                    <TodoButton data-testid="cancel-button" type="button" onClick={(id) => handleUpdate(id)}>취소</TodoButton>
                 </StyledForm>
             ) : (
                 <div>
                     <TodoButton data-testid="modify-button" onClick={handleUpdate}>수정</TodoButton>
-                    <TodoButton data-testid="delete-button" onClick={handleDelete}>삭제</TodoButton>
+                    <TodoButton data-testid="delete-button" onClick={onDelete}>삭제</TodoButton>
                 </div>
             )}
         </StyledLi>

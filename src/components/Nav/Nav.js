@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
-import { NavLink, Navigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 /**
  * 메뉴 (Nav bar)
@@ -46,10 +46,6 @@ const NavLinkStyle = styled(NavLink)`
 function Nav() {
     const [isAuth, setIsAuth] = useState(localStorage.getItem("loginToken") ? true : false);
     const navigate = useNavigate();
-
-    useState(()=> {
-      console.log(isAuth);
-    });
 
     return (  
         <Navbar>
